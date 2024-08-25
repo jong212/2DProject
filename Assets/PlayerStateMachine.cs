@@ -16,7 +16,7 @@ public class PlayerStateMachine
     {
         currentState.Exit();
         currentState = _newState;
-        currentState.Update();
+        currentState.Enter();
     }
   
     // Update is called once per frame
