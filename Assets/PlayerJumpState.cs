@@ -11,6 +11,7 @@ public class PlayerJumpState : PlayerState
     public override void Enter()
     {
         base.Enter();
+        // 점프상태니까 jumpforce를 velocity에 반영함
         rb.velocity = new Vector2(rb.velocity.x, player.jumpForce);
     }
 
@@ -22,6 +23,7 @@ public class PlayerJumpState : PlayerState
     public override void Update()
     {
         base.Update();
+        
         if (rb.velocity.y < 0)
             stateMachine.ChangeState(player.airState);
     }

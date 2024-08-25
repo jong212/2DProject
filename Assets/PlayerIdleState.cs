@@ -22,6 +22,7 @@ public class PlayerIdleState : PlayerGroundedState
     {
         base.Update();
 
+        // 움직이고 있으면 move로
         if (xInput != 0)
             stateMachine.ChangeState(player.moveState);
     }

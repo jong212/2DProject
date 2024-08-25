@@ -1,14 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-// Player.cs             역할: 플레이어 캐릭터에 대한 상태를 관리하는 PlayerStateMachine을 초기화하고, 플레이어의 현재 상태를 업데이트합니다.
+// Player.cs             역할: 플레이어 캐릭터에 대한 상태를 관리하는 곳 // 속도값,점프값 등 주요 번수는 여기서 설정!
+// PlayerState.cs        역할: 상태별로 플레이어가 어떤 행동을 해야 하는지를 정의하는 기본 클래스. 이 클래스는 !!공통 동작!!을 정의하고, 각 상태(Idle, Move, Jump 등)는 이를 상속받아 고유한 동작을 추가합니다.
 // PlayerStateMachine.cs 역할: 플레이어의 현재 상태를 저장하고, 상태를 전환하는 기능을 담당합니다.
-// PlayerState.cs        역할: 상태 객체의 기본 클래스입니다. 각 상태는 이 클래스를 상속받아 상태에 따른 행동을 정의합니다.
 public class Player : MonoBehaviour
 {
     [Header("Move info")]
     public float moveSpeed = 8f;
     public float jumpForce = 12f;
+
+    [Header("Collision info")]
+    [SerializeField] private Transform groundCheck;
+    [SerializeField] private float groundCheckDistance;
+    [SerializeField] private Transform wallCheck;
+    [SerializeField] private float wallCheckDistance;
+    [SerializeField] private LayerMask whatIsGround;
+
     #region Components
     public Animator anim { get; private set; }
     public Rigidbody2D rb { get; private set; }
@@ -39,9 +47,16 @@ public class Player : MonoBehaviour
     private void Update()
     {
         stateMachine.currentState.Update();
+
     }
     public void SetVelocity(float _xVelocity,float _yVelocity)
     {
         rb.velocity = new Vector2(_xVelocity, _yVelocity);
+    }
+    public bool IsGroundDetected() => Physics2D.Raycast(groundCheck.position, Vector2.down, groundCheckDistance, whatIsGround);
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawLine(groundCheck.position, new Vector3(groundCheck.position.x, groundCheck.position.y - groundCheckDistance));
+        Gizmos.DrawLine(wallCheck.position, new Vector3(wallCheck.position.x + wallCheckDistance,wallCheck.position.y));
     }
 }

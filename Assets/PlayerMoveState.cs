@@ -24,6 +24,7 @@ public class PlayerMoveState : PlayerGroundedState
 
         player.SetVelocity(xInput * player.moveSpeed, rb.velocity.y);
 
+        //안 움직이고 있으면 idle로
         if (xInput == 0)
             stateMachine.ChangeState(player.idleState);
     }
