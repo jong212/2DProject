@@ -1,9 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
- 
 
-// Player.cs             역할: 플레이어 캐릭터에 대한 상태를 관리하는 곳 // 속도값,점프값 등 주요 번수는 여기서 설정!
+
+// Player.cs             역할: Player.cs는 플레이어 캐릭터의 기본적인 속성과 컴포넌트들을 정의하는 클래스입니다.
 // PlayerState.cs        역할: 상태별로 플레이어가 어떤 행동을 해야 하는지를 정의하는 기본 클래스. 이 클래스는 !!공통 동작!!을 정의하고, 각 상태(Idle, Move, Jump 등)는 이를 상속받아 고유한 동작을 추가합니다.
 // PlayerStateMachine.cs 역할: 플레이어의 현재 상태를 저장하고, 상태를 전환하는 기능을 담당합니다.
 public class Player : MonoBehaviour
@@ -42,6 +42,8 @@ public class Player : MonoBehaviour
     public PlayerDashState dashState{ get; private set; }
     public PlayerWallSlideState wallSlide{ get; private set; }
     public PlayerWallJumpState wallJump{ get; private set; }
+
+    public PlayerPrimaryAttack primaryAttack { get; private set; }
     #endregion
 
     private void Awake()
@@ -54,6 +56,11 @@ public class Player : MonoBehaviour
         dashState = new PlayerDashState(this,stateMachine, "Dash");
         wallSlide = new PlayerWallSlideState(this,stateMachine, "WallSlide");
         wallJump = new PlayerWallJumpState(this,stateMachine, "Jump");
+
+
+        primaryAttack = new PlayerPrimaryAttack(this,stateMachine, "Attack");
+
+
     }
     private void Start()
     {
@@ -67,8 +74,10 @@ public class Player : MonoBehaviour
     {
         stateMachine.currentState.Update();
         CheckForDashInput();
-
     }
+
+    public void AnimationTriggger() => stateMachine.currentState.AnimationFinishTrigger();
+
     private void CheckForDashInput()
     {
         if (IsWallDetected())
