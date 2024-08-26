@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Windows;
-using Input = UnityEngine.Input;
+
+
 // Player.cs             역할: 플레이어 캐릭터에 대한 상태를 관리하는 곳 // 속도값,점프값 등 주요 번수는 여기서 설정!
 // PlayerState.cs        역할: 상태별로 플레이어가 어떤 행동을 해야 하는지를 정의하는 기본 클래스. 이 클래스는 !!공통 동작!!을 정의하고, 각 상태(Idle, Move, Jump 등)는 이를 상속받아 고유한 동작을 추가합니다.
 // PlayerStateMachine.cs 역할: 플레이어의 현재 상태를 저장하고, 상태를 전환하는 기능을 담당합니다.
@@ -13,6 +13,8 @@ public class Player : MonoBehaviour
     public float jumpForce = 12f;
 
     [Header("Dash info")]
+    [SerializeField] private float dashCooldown = 1f;
+    private float dashUsageTimer;
     public float dashSpeed = 25;
     public float dashDuration = .2f;
     public float dashDir { get;private set; }
@@ -65,8 +67,10 @@ public class Player : MonoBehaviour
     }
     private void CheckForDashInput()
     {
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+        dashUsageTimer -= Time.deltaTime;
+        if (Input.GetKeyDown(KeyCode.LeftShift) && dashUsageTimer < 0)
         {
+            dashUsageTimer = dashCooldown;
             dashDir = Input.GetAxisRaw("Horizontal");
 
             if (dashDir == 0)
