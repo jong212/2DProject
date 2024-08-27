@@ -2,6 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Entity.cs : 플레이어와 적의 공통된 기능을 관리하는 기본 클래스입니다.
+// ㄴ Player.cs : 매 프레임마다 Player의 Update() 메서드에서 현재 상태의 Update()가 호출됩
+// ㄴ PlayerState.cs : 모든 플레이어 상태 클래스의 기본 클래스입니다. // 각 상태는 이를 상속받아 구체적인 행동을 정의합니다. 예를 들어, **PlayerAirState.cs**는 공중 상태에서의 행동을 처리합니다.
+
+// ㄴ Enemy.cs : Player.cs와 동일
+// ㄴ EnemyState.cs : Player.cs와 동일
 public class Player : Entity
 {
 

@@ -11,6 +11,7 @@ public class PlayerAirState : PlayerState
     public override void Enter()
     {
         base.Enter();
+        Debug.Log("test2");
     }
 
     public override void Exit()
