@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 
 // Player.cs             역할: Player.cs는 플레이어 캐릭터의 기본적인 속성과 컴포넌트들을 정의하는 클래스입니다.
@@ -8,6 +9,10 @@ using UnityEngine;
 // PlayerStateMachine.cs 역할: 플레이어의 현재 상태를 저장하고, 상태를 전환하는 기능을 담당합니다.
 public class Player : MonoBehaviour
 {
+    [Header("Attack details")]
+    public Vector2[] attackMovement;
+
+    public bool isBusy { get; private set; }
     [Header("Move info")]
     public float moveSpeed = 8f;
     public float jumpForce = 12f;
@@ -43,7 +48,7 @@ public class Player : MonoBehaviour
     public PlayerWallSlideState wallSlide{ get; private set; }
     public PlayerWallJumpState wallJump{ get; private set; }
 
-    public PlayerPrimaryAttack primaryAttack { get; private set; }
+    public PlayerPrimaryAttackState primaryAttack { get; private set; }
     #endregion
 
     private void Awake()
@@ -58,7 +63,7 @@ public class Player : MonoBehaviour
         wallJump = new PlayerWallJumpState(this,stateMachine, "Jump");
 
 
-        primaryAttack = new PlayerPrimaryAttack(this,stateMachine, "Attack");
+        primaryAttack = new PlayerPrimaryAttackState(this,stateMachine, "Attack");
 
 
     }
@@ -76,6 +81,15 @@ public class Player : MonoBehaviour
         CheckForDashInput();
     }
 
+    public IEnumerator BusyFor(float _seconds)
+    {
+        isBusy = true;
+        Debug.Log("isbusy");
+        yield return new WaitForSeconds(_seconds);
+        Debug.Log("Notbusy");
+        isBusy = false;
+
+    }
     public void AnimationTriggger() => stateMachine.currentState.AnimationFinishTrigger();
 
     private void CheckForDashInput()
@@ -95,11 +109,16 @@ public class Player : MonoBehaviour
         }
 
     }
+    #region Velocity
+    public void ZeroVelocity() => rb.velocity = new Vector2(0, 0);
+
     public void SetVelocity(float _xVelocity,float _yVelocity)
     {
         rb.velocity = new Vector2(_xVelocity, _yVelocity);
         FlipController(_xVelocity);
     }
+    #endregion
+    #region Collision
     public bool IsGroundDetected() => Physics2D.Raycast(groundCheck.position, Vector2.down, groundCheckDistance, whatIsGround);
     public bool IsWallDetected() => Physics2D.Raycast(wallCheck.position, Vector2.right * facingDir, wallCheckDistance, whatIsGround);
     private void OnDrawGizmos()
@@ -107,7 +126,8 @@ public class Player : MonoBehaviour
         Gizmos.DrawLine(groundCheck.position, new Vector3(groundCheck.position.x, groundCheck.position.y - groundCheckDistance));
         Gizmos.DrawLine(wallCheck.position, new Vector3(wallCheck.position.x + wallCheckDistance,wallCheck.position.y));
     }
-
+    #endregion
+    #region Flip
     public void Flip()
     {
         facingDir = facingDir * -1;
@@ -123,4 +143,5 @@ public class Player : MonoBehaviour
         else if(_x < 0 && facingRight)
             Flip();
     }
+    #endregion
 }
