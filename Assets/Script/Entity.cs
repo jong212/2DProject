@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+// 적과 플레이어의 공통 로직을 제공하는 기본 클래스.
+
 
 public class Entity : MonoBehaviour
 {
@@ -34,7 +36,7 @@ public class Entity : MonoBehaviour
 
     }
     #region Velocity
-    public void ZeroVelocity() => rb.velocity = new Vector2(0, 0);
+    public void SetZeroVelocity() => rb.velocity = new Vector2(0, 0);
 
     public void SetVelocity(float _xVelocity, float _yVelocity)
     {

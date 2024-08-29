@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class SkeletonBattleState : EnemyState
 {
+    Transform player;
     Enemy_Skeleton enemy;
+    private int moveDir;
     // Start is called before the first frame update
     public SkeletonBattleState(Enemy _enemyBase, EnemyStateMachine _stateMachine, string _animBoolName, Enemy_Skeleton enemy) : base(_enemyBase, _stateMachine, _animBoolName)
     {
@@ -15,6 +17,8 @@ public class SkeletonBattleState : EnemyState
     {
         Debug.Log("dsfsdf");
         base.Enter();
+
+        player = GameObject.Find("Player").transform;
     }
 
     public override void Exit()
@@ -25,5 +29,32 @@ public class SkeletonBattleState : EnemyState
     public override void Update()
     {
         base.Update();
+
+        if (enemy.IsPlayerDetected())
+        {
+            if(enemy.IsPlayerDetected().distance < enemy.attackDistance)
+            {
+                if(CanAttack())
+                stateMachine.ChangeState(enemy.attackState);
+            }
+        }
+
+        if (player.position.x > enemy.transform.position.x)
+            moveDir = 1;
+        else if (player.position.x < enemy.transform.position.x)
+            moveDir = -1;
+
+        enemy.SetVelocity(enemy.moveSpeed * moveDir, rb.velocity.y);
+    }
+    private bool CanAttack()
+    {
+        if(Time.time >= enemy.lastTimeAttacked + enemy.attackCoolDown)
+        {
+            enemy.lastTimeAttacked = Time.time;
+            return true;
+
+        }
+        return false;
+
     }
 }
