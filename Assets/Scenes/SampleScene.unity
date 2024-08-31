@@ -309,6 +309,7 @@ GameObject:
   m_Component:
   - component: {fileID: 489997607}
   - component: {fileID: 489997610}
+  - component: {fileID: 489997611}
   - component: {fileID: 489997609}
   - component: {fileID: 489997608}
   m_Layer: 7
@@ -439,6 +440,20 @@ MonoBehaviour:
   attackDistance: 1.5
   attackCoolDown: 0.4
   lastTimeAttacked: 0
+--- !u!114 &489997611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 489997606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: edbc8ea475fafd54ca145b3a719823ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flahDuration: 0.2
+  hitMat: {fileID: 2100000, guid: 4f1d0f17dc060a243b4ee9eb84965231, type: 2}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -28391,6 +28406,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1195560130}
   - component: {fileID: 1195560129}
+  - component: {fileID: 1195560133}
   - component: {fileID: 1195560132}
   - component: {fileID: 1195560131}
   m_Layer: 6
@@ -28511,6 +28527,20 @@ CapsuleCollider2D:
   m_Offset: {x: -0.06784159, y: -0.27535737}
   m_Size: {x: 0.79531085, y: 2.093448}
   m_Direction: 0
+--- !u!114 &1195560133
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1195560128}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: edbc8ea475fafd54ca145b3a719823ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flahDuration: 0.15
+  hitMat: {fileID: 2100000, guid: 4f1d0f17dc060a243b4ee9eb84965231, type: 2}
 --- !u!1 &1281848397
 GameObject:
   m_ObjectHideFlags: 3

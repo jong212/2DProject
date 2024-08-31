@@ -9,6 +9,7 @@ public class Entity : MonoBehaviour
     #region Components
     public Animator anim { get; private set; }
     public Rigidbody2D rb { get; private set; }
+    public EntityFX fx { get; private set; }
 
     #endregion
 
@@ -30,15 +31,16 @@ public class Entity : MonoBehaviour
     }
     protected virtual void Start()
     {
+        fx = GetComponentInChildren<EntityFX>();
         anim = GetComponentInChildren<Animator>();
         rb = GetComponent<Rigidbody2D>();
     }
     protected virtual void Update()
     {
-
     }
     public virtual void Damage()
     {
+        fx.StartCoroutine("FlashFX");
 
     }
     #region Velocity
