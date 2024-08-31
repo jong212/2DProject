@@ -16,7 +16,7 @@ public class SkeletonGroundedState : EnemyState
     public override void Enter()
     {
         base.Enter();
-        player = Playermanager.instance.transform;
+        player = Playermanager.instance.player.transform;
     }
 
     public override void Exit()

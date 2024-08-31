@@ -18,7 +18,7 @@ public class SkeletonBattleState : EnemyState
         Debug.Log("dsfsdf");
         base.Enter();
 
-        player = Playermanager.instance.transform;
+        player = Playermanager.instance.player.transform;
     }
 
     public override void Exit()
