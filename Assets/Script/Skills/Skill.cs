@@ -15,7 +15,7 @@ public class Skill : MonoBehaviour
 
     public virtual bool CanUseSkill()
     {
-        if(cooldownTimer <= 0)
+        if(cooldownTimer < 0)
         {
             cooldownTimer = cooldown;
             return true;
