@@ -356,6 +356,7 @@ GameObject:
   - component: {fileID: 449816364}
   - component: {fileID: 449816363}
   - component: {fileID: 449816365}
+  - component: {fileID: 449816366}
   m_Layer: 0
   m_Name: SkillManager
   m_TagString: Untagged
@@ -418,6 +419,23 @@ MonoBehaviour:
   cooldown: 1
   clonePrefab: {fileID: 3897583347025337640, guid: bc80d74e2a6a67e48991f20a5fca5cda, type: 3}
   cloneDuration: 1.5
+  canAttack: 1
+--- !u!114 &449816366
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 449816361}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13ac358aa7f139e4da5746385192c697, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cooldown: 0
+  swordPrefab: {fileID: 0}
+  launchDir: {x: 0, y: 0}
+  swordGravity: 0
 --- !u!1 &450682601
 GameObject:
   m_ObjectHideFlags: 0
@@ -699,7 +717,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.5290413, y: 2.0008717, z: -10.060183}
+  m_LocalPosition: {x: -3.629584, y: 2.0008717, z: -10.060183}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -28615,7 +28633,7 @@ Transform:
   m_GameObject: {fileID: 1195560128}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -5.16, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -29337,7 +29355,7 @@ Transform:
   m_GameObject: {fileID: 1836490064}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.5290413, y: 2.0008717, z: -10.060183}
+  m_LocalPosition: {x: -3.629584, y: 2.0008717, z: -10.060183}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
